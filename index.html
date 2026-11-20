@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>Kitap Günlüğüm</title>
 <style>
-:root{--bg:#f6f1e7;--ink:#2b2118;--muted:#7a6a58;--accent:#b5562e;--card:#fffdf8;--line:#e4d9c6}
+:root{--bg:#f3ece0;--ink:#2b2118;--muted:#7a6a58;--accent:#b5562e;--card:#fffdf8;--line:#e4d9c6}
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
 header{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 20px;background:#2b1d14;color:#f6f1e7}
@@ -16,6 +16,7 @@ button,.btn{font:inherit;font-size:15px;border:0;border-radius:10px;padding:10px
 .primary{background:var(--accent);color:#fff}
 .ghost{background:transparent;color:inherit;border:1px solid currentColor}
 .danger{background:#a33;color:#fff}
+.done{background:#2f6b45;color:#fff}
 .mini{padding:4px 10px;font-size:13px}
 main{max-width:1200px;margin:0 auto;padding:8px 20px 40px}
 h2{font:600 21px Georgia,serif;margin:22px 0 12px}
@@ -29,24 +30,44 @@ h3{font:600 17px Georgia,serif;margin:20px 0 10px}
 .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:8px 0 4px}
 .bar>div{height:100%;background:var(--accent)}
 .empty{color:var(--muted);padding:24px;text-align:center;border:2px dashed var(--line);border-radius:14px}
-/* 3D raf */
-.scene{perspective:1700px;perspective-origin:50% 25%;padding:50px 0 70px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:radial-gradient(ellipse at 50% 40%,#fff8ea,#e9dfcc);border-radius:18px}
+
+/* ===== 3D oda ve kitaplık ===== */
+.scene{position:relative;perspective:1800px;perspective-origin:50% 20%;padding:70px 0 150px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;border-radius:20px;background:#22382d}
+.scene::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:20px;background:radial-gradient(ellipse 60% 50% at 50% 22%,rgba(255,200,120,.16),transparent 65%),radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(12,6,2,.6))}
 .case{position:relative;margin:0 auto;transform-style:preserve-3d}
 .case div{transform-style:preserve-3d}
-.w{position:absolute;left:0;top:0;background-color:#8b5a33;background-image:linear-gradient(90deg,rgba(255,255,255,.06),rgba(0,0,0,.08) 40%,rgba(255,255,255,.05) 70%,rgba(0,0,0,.1))}
-.w.back{background-color:#4a2e1c}
-.w.edge{background-color:#6e4326}
+.w{position:absolute;left:0;top:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.07) 0 2px,transparent 2px 9px,rgba(255,255,255,.04) 9px 11px,transparent 11px 19px),linear-gradient(90deg,rgba(255,255,255,.06),rgba(0,0,0,.14)),#7a4a28}
+.w.back{background:linear-gradient(90deg,rgba(0,0,0,.4),transparent 10%,transparent 90%,rgba(0,0,0,.4)),repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 2px,transparent 2px 120px),#3a2214}
+.w.rowshade{background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.15) 25%,transparent 55%,rgba(0,0,0,.25))}
+.w.stile{background:linear-gradient(90deg,#4a2a15,#a06a3d 30%,#7a4a28 60%,#4a2a15)}
+.w.edge{background:linear-gradient(#b8814f,#7a4a28 35%,#4f2e18)}
+.w.board{background:repeating-linear-gradient(0deg,rgba(0,0,0,.07) 0 2px,transparent 2px 11px),linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.05) 60%),#8a5530}
+.w.crown{background:linear-gradient(#c79260,#7a4a28 20%,#5a3519 45%,#a06a3d 62%,#4a2a15)}
+.w.plinth{background:linear-gradient(#a06a3d,#5a3519 15%,#4a2a15)}
+.w.wall{background:radial-gradient(ellipse 35% 30% at 50% 30%,rgba(255,210,140,.2),transparent 70%),repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 3px,transparent 3px 48px),repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0 1px,transparent 1px 24px),#2d4639}
+.w.wains{background:linear-gradient(#a06a3d 0 6px,#4a2a15 6px 10px,transparent 10px),repeating-linear-gradient(90deg,#4a2a15 0 6px,#6b4226 6px 12px,#5c3820 12px 150px)}
+.w.floor{background:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.7) 70%),repeating-linear-gradient(0deg,transparent 0 238px,rgba(0,0,0,.4) 238px 240px),repeating-linear-gradient(90deg,#6e4529 0 88px,#3a2213 88px 90px,#623d23 90px 178px,#3a2213 178px 180px,#734a2c 180px 268px,#3a2213 268px 270px)}
+.w.fshadow{background:radial-gradient(ellipse 50% 40% at 50% 8%,rgba(0,0,0,.7),transparent 75%)}
+.w.rug{border-radius:6px;background:radial-gradient(ellipse 30% 35% at 50% 50%,#c9a15b 0 18%,#8e2a1d 19% 40%,transparent 41%),repeating-linear-gradient(45deg,rgba(255,220,160,.12) 0 6px,transparent 6px 18px),repeating-linear-gradient(-45deg,rgba(0,0,0,.12) 0 6px,transparent 6px 18px),#7c2318;box-shadow:inset 0 0 0 8px #5a1810,inset 0 0 0 12px #c9a15b,inset 0 0 0 26px #5a1810,inset 0 0 0 28px #c9a15b}
 .books{position:absolute;display:flex;align-items:flex-end;gap:2px}
+.deco{flex:none;margin-left:auto;margin-right:8px;transform:translateZ(8px)}
+.deco svg{display:block}
 .book{position:relative;flex:none;cursor:pointer;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .book.pulled{transform:translateY(-24px) translateZ(190px) rotateY(-90deg)}
 .f{position:absolute;left:0;top:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.spine{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 0 10px;overflow:hidden;background-image:linear-gradient(transparent 5%,rgba(0,0,0,.28) 5%,rgba(0,0,0,.28) 6%,transparent 6%,transparent 94%,rgba(0,0,0,.28) 94%,rgba(0,0,0,.28) 95%,transparent 95%),linear-gradient(90deg,rgba(255,255,255,.18),transparent 35%,rgba(0,0,0,.25))}
-.spine .st{writing-mode:vertical-rl;font-family:Georgia,serif;font-weight:600;line-height:1.05;max-height:74%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.spine .sa{writing-mode:vertical-rl;font-size:9px;opacity:.85;max-height:22%;overflow:hidden;white-space:nowrap}
+.spine{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px 0 12px;overflow:hidden}
+.spine.s0{background-image:linear-gradient(transparent 5%,rgba(0,0,0,.3) 5%,rgba(0,0,0,.3) 6%,transparent 6%,transparent 94%,rgba(0,0,0,.3) 94%,rgba(0,0,0,.3) 95%,transparent 95%),linear-gradient(90deg,rgba(255,255,255,.22),rgba(255,255,255,.05) 25%,transparent 50%,rgba(0,0,0,.32))}
+.spine.s1{background-image:linear-gradient(90deg,rgba(255,255,255,.22),rgba(255,255,255,.05) 25%,transparent 50%,rgba(0,0,0,.32))}
+.spine.s1 .st{background:rgba(250,244,230,.92);color:#2b2118;padding:6px 1px;border-radius:2px}
+.spine.s2{color:#e8c872!important;background-image:linear-gradient(transparent 7%,#c9a15b 7%,#c9a15b 8%,transparent 8%,transparent 10%,#c9a15b 10%,#c9a15b 11%,transparent 11%,transparent 89%,#c9a15b 89%,#c9a15b 90%,transparent 90%,transparent 92%,#c9a15b 92%,#c9a15b 93%,transparent 93%),linear-gradient(90deg,rgba(255,255,255,.22),rgba(255,255,255,.05) 25%,transparent 50%,rgba(0,0,0,.32))}
+.spine .st{writing-mode:vertical-rl;font-family:Georgia,serif;font-weight:600;line-height:1.05;max-height:72%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.spine .sa{writing-mode:vertical-rl;font-size:9px;opacity:.85;max-height:20%;overflow:hidden;white-space:nowrap}
 .cover{display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font:600 15px Georgia,serif}
-.pages{background:repeating-linear-gradient(90deg,#e9dfc8 0 1px,#faf5e8 1px 3px)}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.4),transparent 9%,rgba(255,255,255,.06) 11%,transparent 30%,transparent 92%,rgba(0,0,0,.18))}
+.pages{background:linear-gradient(90deg,rgba(0,0,0,.15),transparent 20%,transparent 80%,rgba(0,0,0,.15)),repeating-linear-gradient(90deg,#e9dfc8 0 1px,#faf5e8 1px 3px)}
 #cap{text-align:center;min-height:44px;margin-top:10px}
-/* pencereler */
+
+/* ===== pencereler ===== */
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(30,20,10,.55);display:flex;align-items:flex-start;justify-content:center;padding:4vh 0;overflow:auto}
 .sheet{background:var(--card);width:94%;max-width:640px;border-radius:18px;padding:22px}
 .sheet.wide{max-width:900px}
@@ -102,6 +123,9 @@ input[type=color]{height:44px;padding:4px;width:80px}
 <script>
 const PALETTE=['#7b2d26','#1f3a5f','#2f5d50','#a8742a','#5b3a6b','#8c4a2f','#264653','#9c2f4a','#3d405b','#6b705c','#1d3557','#4f6d3a'];
 const ROW_H=230, D=150;
+const DECOS=[
+`<svg viewBox="0 0 80 120" width="72" height="108"><ellipse cx="40" cy="44" rx="8" ry="27" fill="#4b8b52"/><ellipse cx="27" cy="52" rx="7" ry="23" transform="rotate(-30 27 52)" fill="#3e7646"/><ellipse cx="53" cy="52" rx="7" ry="23" transform="rotate(30 53 52)" fill="#3e7646"/><ellipse cx="19" cy="64" rx="6" ry="17" transform="rotate(-62 19 64)" fill="#5a9a5e"/><ellipse cx="61" cy="64" rx="6" ry="17" transform="rotate(62 61 64)" fill="#5a9a5e"/><path d="M22 80h36l-5 38H27z" fill="#b5562e"/><path d="M22 80h36l-1 7H23z" fill="rgba(0,0,0,.2)"/><rect x="18" y="73" width="44" height="9" rx="2" fill="#c96a3f"/></svg>`,
+`<svg viewBox="0 0 80 120" width="68" height="102"><rect x="20" y="110" width="40" height="8" rx="3" fill="#6b4a20"/><rect x="37" y="92" width="6" height="20" fill="#a07a3a"/><circle cx="40" cy="56" r="33" fill="#2f6f8f"/><path d="M16 42c10 6 16-4 26 2s6 16 16 14M12 66c12-4 18 8 30 2M44 82c6-4 10 0 16-6" stroke="#8fbf74" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="40" cy="56" r="33" fill="url(#gl)"/><path d="M40 18a38 38 0 0 1 0 76" stroke="#c9a15b" stroke-width="3" fill="none"/><defs><radialGradient id="gl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient></defs></svg>`];
 let books=[], ry=-16, pulledId=null, drag=null, tmp={}, editEntryId=null;
 
 /* ---- Depolama (tablette saklanır) ---- */
@@ -153,9 +177,9 @@ function renderReading(){
 /* ---- 3D raf ---- */
 function geom(b){const h=168+hash(b.id+b.title)%34;const t=b.totalPages?Math.max(16,Math.min(60,Math.round(b.totalPages/13)+8)):26;return{t,h,d:Math.round(h*.68)}}
 function bookHTML(b){
-  const {t,h,d}=geom(b),c=colorOf(b),tc=textColor(c);
+  const {t,h,d}=geom(b),c=colorOf(b),tc=textColor(c),v=hash(b.title)%3;
   return `<div class="book${b.id===pulledId?' pulled':''}" data-id="${b.id}" style="width:${t}px;height:${h}px">
-  <div class="f spine" style="width:${t}px;height:${h}px;background-color:${c};color:${tc};transform:translateZ(${d/2}px)"><span class="st" style="font-size:${Math.min(14,Math.max(9,t*.42))}px">${esc(b.title)}</span><span class="sa">${esc((b.author||'').split(' ').pop())}</span></div>
+  <div class="f spine s${v}" style="width:${t}px;height:${h}px;background-color:${c};color:${tc};transform:translateZ(${d/2}px)"><span class="st" style="font-size:${Math.min(14,Math.max(9,t*.42))}px">${esc(b.title)}</span><span class="sa">${esc((b.author||'').split(' ').pop())}</span></div>
   <div class="f" style="width:${t}px;height:${h}px;background:${shade(c,-35)};transform:rotateY(180deg) translateZ(${d/2}px)"></div>
   <div class="f cover" style="width:${d}px;height:${h}px;left:${(t-d)/2}px;${bgOf(b)};color:${tc};transform:rotateY(90deg) translateZ(${t/2}px)">${b.cover?'':esc(b.title)}</div>
   <div class="f" style="width:${d}px;height:${h}px;left:${(t-d)/2}px;background:${shade(c,-20)};transform:rotateY(-90deg) translateZ(${t/2}px)"></div>
@@ -163,161 +187,30 @@ function bookHTML(b){
 }
 function renderShelf(){
   const fin=books.filter(b=>b.finishDate).sort((a,b)=>a.finishDate.localeCompare(b.finishDate));
-  const W=Math.round(Math.max(300,Math.min($('scene').clientWidth-80,1100))),inner=W-40;
+  const W=Math.round(Math.max(300,Math.min($('scene').clientWidth-100,1100))),inner=W-40;
   const rows=[[]];let x=0;
   for(const b of fin){const w=geom(b).t+2;if(x+w>inner&&rows[rows.length-1].length){rows.push([]);x=0}rows[rows.length-1].push(b);x+=w}
   while(rows.length<3)rows.push([]);
-  const T=16,H=rows.length*(ROW_H+T)+T;
-  let s=`<div class="w back" style="width:${W}px;height:${H}px;transform:translateZ(${-D/2}px)"></div>
-  <div class="w" style="width:${D}px;height:${H}px;left:${-D/2}px;transform:rotateY(90deg)"></div>
-  <div class="w" style="width:${D}px;height:${H}px;left:${W-D/2}px;transform:rotateY(90deg)"></div>
-  <div class="w" style="width:${W}px;height:${D}px;top:${-D/2}px;transform:rotateX(90deg)"></div>
-  <div class="w edge" style="width:${W+16}px;height:${T}px;left:-8px;transform:translateZ(${D/2}px)"></div>
-  <div class="w edge" style="width:16px;height:${H}px;left:-8px;transform:translateZ(${D/2}px)"></div>
-  <div class="w edge" style="width:16px;height:${H}px;left:${W-8}px;transform:translateZ(${D/2}px)"></div>`;
-  rows.forEach((r,i)=>{const top=T+i*(ROW_H+T),y=top+ROW_H;
-    s+=`<div class="books" style="left:20px;top:${top}px;height:${ROW_H}px">${r.map(bookHTML).join('')}</div>
-    <div class="w" style="width:${W}px;height:${D}px;top:${y-D/2}px;transform:rotateX(90deg)"></div>
-    <div class="w edge" style="width:${W+16}px;height:${T}px;left:-8px;top:${y}px;transform:translateZ(${D/2}px)"></div>`});
-  const c=$('case');c.style.width=W+'px';c.style.height=H+'px';c.innerHTML=s;applyRot();
-  const pages=books.reduce((s,b)=>s+b.entries.reduce((a,e)=>a+Math.max(0,(+e.to)-(+e.from)+1),0),0);
-  $('stats').textContent=`${fin.length} kitap bitirildi · toplam ${pages} sayfa okundu. Rafı döndürmek için yana kaydır, kitaba dokun.`;
-  updateCap();
-}
-function applyRot(){$('case').style.transform=`rotateY(${ry}deg)`}
-function updateCap(){const b=pulledId&&find(pulledId);
-  $('cap').innerHTML=b?`<b>${esc(b.title)}</b> — ${esc(b.author)} · ${fmt(b.finishDate)} <span style="color:#e0a100">${stars(b.rating)}</span><br><button class="mini primary" onclick="openDetail('${b.id}')">Günlüğü aç</button>`
-    :(books.some(b=>b.finishDate)?'':'Bitirdiğin kitaplar burada rafa dizilecek.')}
-function setPulled(id){pulledId=id;document.querySelectorAll('.book').forEach(el=>el.classList.toggle('pulled',el.dataset.id===id));updateCap()}
-
-const sc=$('scene');
-sc.addEventListener('pointerdown',e=>{drag={x:e.clientX,ry,moved:false,t:e.target}});
-sc.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>8)drag.moved=true;if(drag.moved){ry=Math.max(-50,Math.min(50,drag.ry+dx*.2));applyRot()}});
-sc.addEventListener('pointerup',()=>{if(drag&&!drag.moved){const el=drag.t.closest('.book');
-  if(!el)setPulled(null);else if(el.dataset.id===pulledId)openDetail(pulledId);else setPulled(el.dataset.id)}drag=null});
-sc.addEventListener('pointercancel',()=>drag=null);
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(renderShelf,200)});
-
-/* ---- Pencereler ---- */
-function modal(html,wide){$('modal').innerHTML=`<div class="overlay"><div class="sheet${wide?' wide':''}">${html}</div></div>`;document.body.style.overflow='hidden'}
-function closeModal(){$('modal').innerHTML='';document.body.style.overflow=''}
-
-/* ---- Kitap ekle / düzenle ---- */
-function openBookForm(id){
-  const b=id?find(id):null;
-  tmp={cover:b?b.cover:null,color:b?b.spineColor:null,manual:!!(b&&b.spineColor)};
-  modal(`<h2>${b?'Kitabı düzenle':'Yeni kitap'}</h2>
-  ${b?'':`<div class="search"><input id="q" placeholder="Kitap adı, yazar veya ISBN ile ara" enterkeyhint="search"><button class="primary" onclick="searchBooks()">Ara</button></div><div id="results"></div>`}
-  <div class="formgrid"><div class="coverbox"><div id="cprev" class="thumb big"></div>
-    <label class="btn">📷 Kapak fotoğrafı<input type="file" accept="image/*" hidden onchange="pickCover(this)"></label>
-    <label style="margin:0">Sırt rengi<br><input type="color" id="fc" oninput="tmp.color=this.value;tmp.manual=true;updPrev()"></label></div>
-  <div class="fields"><label>Kitap<input id="ft" oninput="updPrev()"></label><label>Yazar<input id="fa"></label>
-    <div class="two"><label>Başlama tarihi<input type="date" id="fs"></label><label>Toplam sayfa<input type="number" id="fp" inputmode="numeric" min="1"></label></div>
-    ${b&&b.finishDate?`<div class="two"><label>Bitirme tarihi<input type="date" id="ff"></label><label>Puan (0-5)<input type="number" id="frt" min="0" max="5"></label></div><label>Genel değerlendirme<textarea id="fr"></textarea></label>`:''}
-  </div></div>
-  <div class="actions"><button onclick="${b?`openDetail('${b.id}')`:'closeModal()'}">Vazgeç</button><button class="primary" onclick="saveBook(${b?`'${b.id}'`:''})">Kaydet</button></div>`);
-  $('ft').value=b?b.title:'';$('fa').value=b?b.author||'':'';$('fs').value=b?b.startDate||'':today();$('fp').value=b&&b.totalPages?b.totalPages:'';
-  if(b&&b.finishDate){$('ff').value=b.finishDate;$('frt').value=b.rating||'';$('fr').value=b.review||''}
-  if(!b)$('q').addEventListener('keydown',e=>{if(e.key==='Enter')searchBooks()});
-  updPrev();
-}
-function updPrev(){const t=$('ft').value||'Kitap',c=tmp.color||hashColor(t);$('fc').value=c;const p=$('cprev');
-  p.style.cssText=bgOf({cover:tmp.cover,spineColor:c,title:t});p.style.color=textColor(c);p.textContent=tmp.cover?'':t}
-async function searchBooks(){
-  const q=$('q').value.trim();if(!q)return;const R=$('results');R.innerHTML='<div class="muted">Aranıyor…</div>';
-  const isbn=q.replace(/[-\s]/g,''),gq=/^\d{10}(\d{3})?$/.test(isbn)?'isbn:'+isbn:q;
-  const [g,o]=await Promise.allSettled([
-    fetch('https://www.googleapis.com/books/v1/volumes?maxResults=8&q='+encodeURIComponent(gq)).then(r=>r.json()),
-    fetch('https://openlibrary.org/search.json?limit=8&fields=title,author_name,number_of_pages_median,cover_i&q='+encodeURIComponent(q)).then(r=>r.json())]);
-  const res=[];
-  if(g.status==='fulfilled')(g.value.items||[]).forEach(it=>{const v=it.volumeInfo||{};let img=v.imageLinks&&(v.imageLinks.thumbnail||v.imageLinks.smallThumbnail);
-    if(img)img=img.replace('http:','https:').replace('&edge=curl','');res.push({title:v.title||'',author:(v.authors||[]).join(', '),pages:v.pageCount||'',img})});
-  if(o.status==='fulfilled')(o.value.docs||[]).forEach(d=>res.push({title:d.title||'',author:(d.author_name||[]).join(', '),pages:d.number_of_pages_median||'',img:d.cover_i?`https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg`:null}));
-  window._res=res;
-  R.innerHTML=res.length?res.map((r,i)=>`<div class="res" onclick="pickResult(${i})"><div class="thumb" style="background:#bbb${r.img?` url('${cssUrl(r.img)}') center/cover`:''}"></div><div><b>${esc(r.title)}</b><div class="muted">${esc(r.author)}${r.pages?' · '+r.pages+' sayfa':''}</div></div></div>`).join('')
-    :'<div class="muted">Sonuç bulunamadı. Bilgileri aşağıya kendin yazabilir, kapağın fotoğrafını çekebilirsin.</div>';
-}
-async function pickResult(i){const r=window._res[i];$('ft').value=r.title;$('fa').value=r.author;if(r.pages)$('fp').value=r.pages;$('results').innerHTML='';
-  if(r.img){$('cprev').textContent='Yükleniyor…';setCover(await processImage(r.img))}else updPrev()}
-function setCover(x){if(x.cover)tmp.cover=x.cover;if(x.color&&!tmp.manual)tmp.color=x.color;updPrev()}
-function pickCover(inp){const f=inp.files[0];if(!f)return;const fr=new FileReader();fr.onload=async()=>setCover(await processImage(fr.result));fr.readAsDataURL(f)}
-async function saveBook(id){
-  const title=$('ft').value.trim();if(!title){alert('Kitap adını yaz.');return}
-  let b=id?find(id):null;
-  if(!b){b={id:uid(),entries:[],finishDate:'',review:'',rating:0};books.push(b)}
-  Object.assign(b,{title,author:$('fa').value.trim(),startDate:$('fs').value,totalPages:+$('fp').value||0,cover:tmp.cover,spineColor:tmp.color||null});
-  if($('ff')){b.finishDate=$('ff').value;b.rating=Math.max(0,Math.min(5,+$('frt').value||0));b.review=$('fr').value.trim()}
-  await save();render();openDetail(b.id);
-}
-
-/* ---- Kitap sayfası ve günlük kayıtlar ---- */
-function openDetail(id){
-  const b=find(id);if(!b)return closeModal();editEntryId=null;
-  const l=lastPage(b),p=b.totalPages?Math.min(100,Math.round(l/b.totalPages*100)):0;
-  const es=[...b.entries].sort((x,y)=>y.date.localeCompare(x.date)||(y.to-x.to));
-  modal(`<div class="dhead"><div class="thumb big" style="${bgOf(b)};color:${textColor(colorOf(b))}">${b.cover?'':esc(b.title)}</div><div>
-  <h2 style="margin:0">${esc(b.title)}</h2><div class="muted">${esc(b.author)}</div>
-  <dl class="info"><dt>Başlama tarihi</dt><dd>${fmt(b.startDate)}</dd><dt>Toplam sayfa</dt><dd>${b.totalPages||'—'}</dd><dt>Bitirme tarihi</dt><dd>${fmt(b.finishDate)}</dd></dl>
-  <div class="bar"><div style="width:${b.finishDate?100:p}%"></div></div><div class="muted">${l} / ${b.totalPages||'?'} sayfa${b.finishDate?' · Bitti 🎉':' · %'+p}</div>
-  <div class="btns"><button onclick="openBookForm('${b.id}')">Düzenle</button>${b.finishDate?'':`<button class="primary" onclick="openFinish('${b.id}')">Kitabı bitirdim</button>`}<button class="danger" onclick="delBook('${b.id}')">Sil</button></div></div></div>
-  ${b.finishDate?`<div class="review"><h3>Genel değerlendirme <span style="color:#e0a100">${stars(b.rating)}</span></h3><div>${b.review?esc(b.review).replace(/\n/g,'<br>'):'<span class="muted">Değerlendirme eklenmedi.</span>'}</div></div>`:''}
-  <h3 id="eftitle">Yeni okuma kaydı</h3>
-  <div class="eform"><div class="two"><label>Tarih<input type="date" id="ed"></label>
-    <label>Okuduğum sayfalar<span class="range"><input type="number" inputmode="numeric" id="ef">–<input type="number" inputmode="numeric" id="et"></span></label></div>
-    <label>Notlarım <span class="muted">(isteğe bağlı)</span><textarea id="en" placeholder="Aklımda kalanlar, sevdiğim bir bölüm, alıntı veya düşünceler…"></textarea></label>
-    <div class="actions" style="margin-top:0"><button id="ecancel" style="display:none" onclick="openDetail('${b.id}')">Vazgeç</button><button class="primary" id="esave" onclick="saveEntry('${b.id}')">Kaydet</button></div></div>
-  <h3>Okuma günlüğü</h3>
-  ${es.length?es.map(e=>`<div class="entry"><div class="ehead"><b>${fmt(e.date)}</b><span><button class="mini" onclick="editEntry('${b.id}','${e.id}')">Düzenle</button> <button class="mini" onclick="delEntry('${b.id}','${e.id}')">Sil</button></span></div>
-    <div>Okuduğum sayfalar: ${e.from}–${e.to}</div><div>Bugün geldiğim sayfa: <b>${e.to}</b></div>${e.note?`<div class="note">Notlarım: ${esc(e.note).replace(/\n/g,'<br>')}</div>`:''}</div>`).join('')
-    :'<div class="empty">Henüz kayıt yok. Okuduğun günlerde yukarıdan ekleyebilirsin.</div>'}
-  <div class="actions"><button onclick="closeModal()">Kapat</button></div>`,true);
-  $('ed').value=today();$('ef').value=l?l+1:1;
-}
-function editEntry(bid,eid){const e=find(bid).entries.find(x=>x.id===eid);editEntryId=eid;
-  $('ed').value=e.date;$('ef').value=e.from;$('et').value=e.to;$('en').value=e.note||'';
-  $('eftitle').textContent='Kaydı düzenle';$('esave').textContent='Güncelle';$('ecancel').style.display='';$('eftitle').scrollIntoView({behavior:'smooth'})}
-async function saveEntry(bid){
-  const b=find(bid),from=parseInt($('ef').value),to=parseInt($('et').value),date=$('ed').value;
-  if(!date||!from||!to){alert('Tarihi ve okuduğun sayfa aralığını yaz.');return}
-  if(to<from){alert('Bitiş sayfası başlangıç sayfasından küçük olamaz.');return}
-  if(b.totalPages&&to>b.totalPages&&!confirm(`Kitap ${b.totalPages} sayfa görünüyor. Yine de kaydedilsin mi?`))return;
-  const data={date,from,to,note:$('en').value.trim()};
-  if(editEntryId)Object.assign(b.entries.find(x=>x.id===editEntryId),data);else b.entries.push({id:uid(),...data});
-  await save();render();
-  if(!b.finishDate&&b.totalPages&&to>=b.totalPages&&confirm('Son sayfaya geldin! Kitabı bitirdin olarak işaretleyelim mi?'))openFinish(bid);else openDetail(bid);
-}
-async function delEntry(bid,eid){if(!confirm('Bu kayıt silinsin mi?'))return;const b=find(bid);b.entries=b.entries.filter(x=>x.id!==eid);await save();render();openDetail(bid)}
-async function delBook(id){const b=find(id);if(!confirm(`"${b.title}" ve tüm kayıtları silinsin mi?`))return;
-  books=books.filter(x=>x.id!==id);if(pulledId===id)pulledId=null;await save();closeModal();render()}
-
-/* ---- Kitabı bitir ---- */
-function openFinish(id){
-  const b=find(id);let r=b.rating||0;
-  modal(`<h2>Tebrikler! 🎉</h2><p class="muted">“${esc(b.title)}” rafına kaldırılmaya hazır.</p>
-  <label>Bitirme tarihi<input type="date" id="xf"></label>
-  <div class="muted">Puanın (isteğe bağlı)</div><div class="stars" id="xs">${[1,2,3,4,5].map(i=>`<button class="star" data-v="${i}">★</button>`).join('')}</div>
-  <label>Genel değerlendirme <span class="muted">(isteğe bağlı)</span><textarea id="xr" rows="4" placeholder="Kitap hakkında kısa düşüncelerin…"></textarea></label>
-  <div class="actions"><button onclick="openDetail('${id}')">Geri</button><button class="primary" id="xsave">Rafa kaldır 📚</button></div>`);
-  $('xf').value=today();$('xr').value=b.review||'';
-  const paint=()=>document.querySelectorAll('#xs .star').forEach(s=>s.classList.toggle('on',+s.dataset.v<=r));paint();
-  $('xs').onclick=e=>{const v=e.target.dataset&&e.target.dataset.v;if(v){r=(+v===r)?0:+v;paint()}};
-  $('xsave').onclick=async()=>{b.finishDate=$('xf').value||today();b.rating=r;b.review=$('xr').value.trim();
-    await save();closeModal();pulledId=b.id;render();$('scene').scrollIntoView({behavior:'smooth'})};
-}
-
-/* ---- Yedekleme ---- */
-function exportData(){const blob=new Blob([JSON.stringify({app:'kitap-gunlugu',v:1,books})],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`kitap-gunlugu-yedek-${today()}.json`;
-  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
-function importData(inp){const f=inp.files[0];if(!f)return;const fr=new FileReader();
-  fr.onload=async()=>{inp.value='';try{const d=JSON.parse(fr.result),list=Array.isArray(d)?d:d.books;if(!Array.isArray(list))throw 0;
-    if(!confirm(`${list.length} kitaplık yedek yüklenecek. Şu anki kayıtların yerine geçsin mi?`))return;
-    books=list.map(b=>({...b,entries:b.entries||[]}));await save();render();alert('Yedek yüklendi.')}catch(e){alert('Bu dosya okunamadı.')}};
-  fr.readAsText(f)}
-
-/* ---- Başlat ---- */
-(async()=>{try{await DB.open();books=((await DB.get('books'))||[]).map(b=>({...b,entries:b.entries||[]}))}catch(e){alert('Veri deposu açılamadı: '+e)}
-  if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();render()})();
-</script>
-</body>
-</html>
+  const T=16,PL=34,H=rows.length*(ROW_H+T)+T,FY=H+PL,BIG=1600,CD=D+16;
+  let s=`
+  <div class="w wall" style="width:${W+BIG}px;height:${FY+520}px;left:${-BIG/2}px;top:-520px;transform:translateZ(${-D/2-4}px)"></div>
+  <div class="w wains" style="width:${W+BIG}px;height:230px;left:${-BIG/2}px;top:${FY-230}px;transform:translateZ(${-D/2-3}px)"></div>
+  <div class="w floor" style="width:${W+BIG}px;height:1300px;left:${-BIG/2}px;top:${FY}px;transform-origin:50% 0;transform:translateZ(${-D/2-4}px) rotateX(90deg)"></div>
+  <div class="w fshadow" style="width:${W+160}px;height:260px;left:-80px;top:${FY}px;transform-origin:50% 0;transform:translateZ(${-D/2}px) rotateX(90deg) translateZ(1px)"></div>
+  <div class="w rug" style="width:${Math.round(W*.8)}px;height:340px;left:${Math.round(W*.1)}px;top:${FY}px;transform-origin:50% 0;transform:translateZ(${D/2+50}px) rotateX(90deg) translateZ(2px)"></div>
+  <div class="w back" style="width:${W}px;height:${FY}px;transform:translateZ(${-D/2}px)"></div>
+  <div class="w" style="width:${D}px;height:${FY}px;left:${-D/2}px;transform:rotateY(90deg)"></div>
+  <div class="w" style="width:${D}px;height:${FY}px;left:${W-D/2}px;transform:rotateY(90deg)"></div>
+  <div class="w crown" style="width:${W+44}px;height:30px;left:-22px;top:-26px;transform:translateZ(${D/2+8}px)"></div>
+  <div class="w" style="width:${W+44}px;height:${CD}px;left:-22px;top:${-26-CD/2}px;transform:rotateX(90deg)"></div>
+  <div class="w crown" style="width:${CD}px;height:30px;left:${-22-CD/2}px;top:-26px;transform:rotateY(90deg)"></div>
+  <div class="w crown" style="width:${CD}px;height:30px;left:${W+22-CD/2}px;top:-26px;transform:rotateY(90deg)"></div>
+  <div class="w plinth" style="width:${W+24}px;height:${PL}px;left:-12px;top:${H}px;transform:translateZ(${D/2+4}px)"></div>
+  <div class="w plinth" style="width:${D+8}px;height:${PL}px;left:${-12-(D+8)/2}px;top:${H}px;transform:rotateY(90deg)"></div>
+  <div class="w plinth" style="width:${D+8}px;height:${PL}px;left:${W+12-(D+8)/2}px;top:${H}px;transform:rotateY(90deg)"></div>
+  <div class="w edge" style="width:${W}px;height:${T}px;top:0;transform:translateZ(${D/2}px)"></div>`;
+  rows.forEach((r,i)=>{const top=T+i*(ROW_H+T),y=top+ROW_H,used=r.reduce((a,b)=>a+geom(b).t+2,0);
+    const deco=inner-used>=95?`<div class="deco">${DECOS[i%2]}</div>`:'';
+    s+=`<div class="w rowshade" style="width:${W}px;height:${ROW_H}px;top:${top}px;transform:translateZ(${-D/2+1}px)"></div>
+    <div class="books" style="left:20px;top:${top}px;width:${inner}px;height:${ROW_H}px">${r.map(bookHTML).join('')}${deco}</div>
+    <div class="w board" styl
